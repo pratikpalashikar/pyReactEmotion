@@ -10,51 +10,29 @@ export default class Hello extends React.Component {
     /*Constructor*/
     constructor(props) {
         super(props);
-        this.state = {value: '', emotion: '',emoji:''};
+        this.state = {textInput: '', emotion: 'Hi'};
         this.getEmotion = this.getEmotion.bind(this);
         this.setValue = this.setValue.bind(this);
-        this.displayEmotion = this.displayEmotion(this);
     }
 
 
     setValue(input) {
-        this.setState({value: input.target.value})
+        this.setState({textInput: input.target.value})
     }
 
-    displayEmotion() {
+    getEmotion(event) {
+        event.preventDefault();
 
-        var positiveEmotion = ['\ud83d\ude07','\ud83d\ude3f','\ud83d\ude4b'];
-        var negativeEmotion = ['\ud83d\ude07','\ud83d\ude3f','\ud83d\ude4b'];
-        var neutralEmotion = ['\ud83d\ude07','\ud83d\ude3f','\ud83d\ude4b'];
-
-        var arrayLength = positiveEmotion.length;
-        if (this.state.emotion === 'postive') {
-            var randNum = Math.floor(Math.random()*arrayLength);
-            this.state.emoji = (positiveEmotion[randNum]);
-        } else if (this.state.emotion === 'negative') {
-            var randNum = Math.floor(Math.random()*arrayLength);
-            this.state.emoji =  (negativeEmotion[randNum]);
-        } else {
-            var randNum = Math.floor(Math.random()*arrayLength);
-            this.state.emoji =  (neutralEmotion[randNum]);
-        }
-
-    }
-
-    setEmotionResult(result){
-        this.setState = {emotion:result};
-        this.displayEmotion();
-    }
-
-    getEmotion() {
         $.ajax({
             type: "GET",
-            url: 'http://127.0.0.1:5000/' + 'getemotion',
-            data: {input: this.state.value}
-        }).done(function (response) {
-            this.setEmotionResult(response);
-        });
+            url: 'http://' + this.props.url + '/' + this.props.method,
+            data: {input: this.state.textInput}
+        }).then(function (response) {
+            this.setState({emotion: response})
+        }.bind(this));
+
     }
+
 
     render() {
         return (
@@ -62,7 +40,7 @@ export default class Hello extends React.Component {
                 <form onSubmit={this.getEmotion}>
                     <Row>
                         <Col md={6} mdOffset={5}>
-                            <input type="text" value={this.state.value} onChange={this.setValue}/>
+                            <input type="text" value={this.state.textInput} onChange={this.setValue}/>
                         </Col>
                     </Row>
                     <Row>
@@ -74,7 +52,7 @@ export default class Hello extends React.Component {
                 </form>
                 <Row>
                     <div>
-                        <h1>{this.state.emoji}</h1>
+                        <h1>{this.state.emotion}</h1>
                     </div>
                 </Row>
 

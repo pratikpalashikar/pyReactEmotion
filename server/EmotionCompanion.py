@@ -32,9 +32,6 @@ def getemotion():
     # percentage of neutral tweets
     #neutral = (100 * (len(tweets) - len(ntweets) - len(ptweets)) / len(tweets))
 
-    print positive
-    print negative
-
     if positive == 100:
         return 'positive'
     elif negative == 100:
@@ -84,4 +81,4 @@ def get_tweets(statement):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run('127.1.68.22')
