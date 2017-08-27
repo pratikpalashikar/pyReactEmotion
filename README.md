@@ -12,12 +12,12 @@
  
  ### Installing backend dependencies
  
-Install python 2.7.13 [Python install](https://www.python.org/downloads/)
-Install pip for python. You can install python packages using the pip module. [pip](https://pypi.python.org/pypi/pip)
-Install python flask, its a lightweight framework to get you started with web application.
--  pip install Flask
-Install the below packages
-- Textblob
+- Install python 2.7.13 [Python install](https://www.python.org/downloads/)
+- Install pip for python. You can install python packages using the pip module. [pip](https://pypi.python.org/pypi/pip)
+- Install python flask, its a lightweight framework to get you started with web application.
+  - pip install Flask
+- Install the below packages
+  - Textblob
 
 
 # Run the application
